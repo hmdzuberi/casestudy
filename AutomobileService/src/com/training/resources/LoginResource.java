@@ -34,44 +34,22 @@ public class LoginResource {
 		}
 	}
 
-	@GET
-	public Response getLoginPage() {
-
-		System.out.println("Login Page");
-		URI uri = null;
-
-		try {
-			uri = new URI("login.html");
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-
-		return Response.temporaryRedirect(uri).build();
-
-	}
-
 	@POST
 	public Response login(@FormParam("username") String username, @FormParam("password") String password) {
 
-		String path = "/login";
+		boolean isValid = false;
 
 		try {
-			if (employeeDAO.login(username, password)) {
-				path = "/main";
-			}
+
+			isValid = employeeDAO.login(username, password);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		URI uri = null;
-
-		try {
-			uri = new URI(path);
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-
-		return Response.temporaryRedirect(uri).build();
+		if(isValid)
+			return Response.status(200).build();
+		else
+			return Response.status(403).build();
 
 	}
 

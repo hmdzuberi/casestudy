@@ -20,7 +20,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 		boolean isValid = false;
 
-		String sql = "select * from hz_employeeLogin where username = ? and pass = ?";
+		String sql = "select * from hz_employees where username = ? and pass = ?";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 
 		pstmt.setString(1, username);
