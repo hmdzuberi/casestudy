@@ -22,7 +22,7 @@
 <body>
 	<c:if test="${isValidUser == false}">
 		<%
-			response.sendRedirect("/login");
+			response.sendRedirect("login");
 		%>
 	</c:if>
 	<c:if test="${isValidUser == true}">
