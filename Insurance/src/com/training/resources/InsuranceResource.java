@@ -1,0 +1,56 @@
+package com.training.resources;
+
+import java.sql.Connection;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import com.training.beans.Insurance;
+import com.training.dao.InsuranceDAO;
+import com.training.dao.impl.InsuranceDAOImpl;
+
+@Path("/insurance")
+public class InsuranceResource {
+
+	private InsuranceDAO insuranceDAO;
+
+	public InsuranceResource() {
+		try {
+			Context ctx = new InitialContext();
+			DataSource dataSource = (DataSource) ctx.lookup("java:/comp/env/jdbc/ds1");
+			Connection con = dataSource.getConnection();
+
+			System.out.println(con);
+			this.insuranceDAO = new InsuranceDAOImpl(con);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@GET
+	@Path("get")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getInsuranceDetails(@QueryParam("carNo") String carNo) {
+
+		Insurance insuranceDetails = null;
+		System.out.println(carNo);
+
+		try {
+			insuranceDetails = insuranceDAO.getInsuranceDetails(carNo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		System.out.println(insuranceDetails);
+
+		return Response.status(200).entity(insuranceDetails).build();
+	}
+
+}
