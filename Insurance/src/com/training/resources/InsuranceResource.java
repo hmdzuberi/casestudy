@@ -12,6 +12,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.log4j.Logger;
+
 import com.training.beans.Insurance;
 import com.training.dao.InsuranceDAO;
 import com.training.dao.impl.InsuranceDAOImpl;
@@ -20,15 +22,19 @@ import com.training.dao.impl.InsuranceDAOImpl;
 public class InsuranceResource {
 
 	private InsuranceDAO insuranceDAO;
+	private Logger log;
 
 	public InsuranceResource() {
 		try {
+			log = Logger.getRootLogger();
+
 			Context ctx = new InitialContext();
 			DataSource dataSource = (DataSource) ctx.lookup("java:/comp/env/jdbc/ds1");
 			Connection con = dataSource.getConnection();
 
 			System.out.println(con);
 			this.insuranceDAO = new InsuranceDAOImpl(con);
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -48,7 +54,7 @@ public class InsuranceResource {
 			e.printStackTrace();
 		}
 
-		System.out.println(insuranceDetails);
+		log.info(insuranceDetails);
 
 		return Response.status(200).entity(insuranceDetails).build();
 	}
