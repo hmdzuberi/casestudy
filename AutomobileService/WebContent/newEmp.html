@@ -11,14 +11,16 @@
 	
 		$(function() {
 			$("#registerBtn").on('click', function() {
+				var user = {
+					"username": $("#username").val(),
+					"password": $("#password").val()
+				};
+				
 				$.ajax({
-					url: "http://localhost:5000/AutomobileService/rest/EmpRegister",
+					url: "http://localhost:8080/AutomobileService/rest/EmpRegister",
 					method: "POST",
 					contentType:"application/json",
-					data: {
-						"username": $("#username").val(),
-						"password": $("#password").val()
-					},
+					data: JSON.stringify(user),
 					success: function(data) {
 						$("#info").empty();
 						$("#info").append("<span>" + data + "</span>");
