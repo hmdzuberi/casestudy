@@ -7,13 +7,34 @@
         crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
         crossorigin="anonymous"></script>
+	<script type="text/javascript">
+	
+		$(function() {
+			$("#registerBtn").on('click', function() {
+				$.ajax({
+					url: "http://localhost:5000/AutomobileService/rest/EmpRegister",
+					method: "POST",
+					contentType:"application/json",
+					data: {
+						"username": $("#username").val(),
+						"password": $("#password").val()
+					},
+					success: function(data) {
+						$("#info").empty();
+						$("#info").append("<span>" + data + "</span>");
+					}
+				});
+			});
+		});
+	
+	</script>
     <title>Login</title>
 </head>
 
 <body>
     <div class="col-md-4" style="margin-left: 10px">
-    	<h2>Login</h2>
-        <form class="form-group" id="loginForm" method="POST" action="login">
+    	<h2>Register</h2>
+        <form class="form-group" id="regForm">
             <div>
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" class="form-control">
@@ -25,11 +46,13 @@
             </div>
             <br>
             <div>
-                <input type="submit" value="Login" class="btn btn-primary" id="loginBtn">
+                <input type="button" value="register" class="btn btn-primary" id="registerBtn">
             </div>
         </form>
+        <br>
+        <div id="info"></div>
 		<br>
-		<a href="newEmp.html">New Employee?</a>
+		<a href="login">Back</a>
     </div>
 </body>
 
