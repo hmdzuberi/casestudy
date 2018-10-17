@@ -6,17 +6,19 @@ public class Customer {
 	private String customerName;
 	private long phoneNo;
 	private String address;
+	private Car car;
 
 	public Customer() {
 		super();
 	}
 
-	public Customer(long customerNo, String customerName, long phoneNo, String address) {
+	public Customer(long customerNo, String customerName, long phoneNo, String address, Car car) {
 		super();
 		this.customerNo = customerNo;
 		this.customerName = customerName;
 		this.phoneNo = phoneNo;
 		this.address = address;
+		this.car = car;
 	}
 
 	public long getCustomerNo() {
@@ -51,10 +53,18 @@ public class Customer {
 		this.address = address;
 	}
 
+	public Car getCar() {
+		return car;
+	}
+
+	public void setCar(Car car) {
+		this.car = car;
+	}
+
 	@Override
 	public String toString() {
 		return "Customer [customerNo=" + customerNo + ", customerName=" + customerName + ", phoneNo=" + phoneNo
-				+ ", address=" + address + "]";
+				+ ", address=" + address + ", car=" + car + "]";
 	}
 
 }

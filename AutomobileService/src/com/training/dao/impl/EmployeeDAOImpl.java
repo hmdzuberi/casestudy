@@ -20,7 +20,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 		boolean isValid = false;
 
-		String sql = "select * from hz_employees where username = ? and pass = ?";
+		String sql = "select * from hz_employeeLogin where username = ? and pass = ?";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 
 		pstmt.setString(1, username);
@@ -28,10 +28,22 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 		ResultSet rs = pstmt.executeQuery();
 
-		while(rs.next())
+		while (rs.next())
 			isValid = true;
 
 		return isValid;
+	}
+
+	@Override
+	public int register(String username, String password) throws SQLException {
+
+		String sql = "insert into hz_employeeLogin values (?, ?)";
+		PreparedStatement pstmt = con.prepareStatement(sql);
+
+		pstmt.setString(1, username);
+		pstmt.setString(2, password);
+
+		return pstmt.executeUpdate();
 	}
 
 }

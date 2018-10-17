@@ -6,4 +6,6 @@ public interface EmployeeDAO {
 
 	public boolean login(String username, String password) throws SQLException;
 
+	public int register(String username, String password) throws SQLException;
+
 }
