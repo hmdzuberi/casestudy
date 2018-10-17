@@ -43,6 +43,7 @@ public class CustomerResource {
 	public String addCustomer(Customer customer) {
 
 		int customerAdded = 0;
+		String result = "Error";
 
 		try {
 			customerAdded = customerDAO.addCustomer(customer);
@@ -50,7 +51,8 @@ public class CustomerResource {
 			e.printStackTrace();
 		}
 
-		String result = customerAdded + " customer added";
+		if (customerAdded != 0)
+			result = customerAdded + " customer added";
 
 		return result;
 	}
