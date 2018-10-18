@@ -14,6 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import com.training.beans.Customer;
 import com.training.dao.CustomerDAO;
@@ -63,6 +64,7 @@ public class CustomerResource {
 	public String updateCustomer(Customer customer) {
 
 		int customerUpdated = 0;
+		String result = "Error";
 
 		try {
 			customerUpdated = customerDAO.updateCustomer(customer);
@@ -70,7 +72,8 @@ public class CustomerResource {
 			e.printStackTrace();
 		}
 
-		String result = customerUpdated + " customer updated";
+		if (customerUpdated != 0)
+			result = customerUpdated + " customer updated";
 
 		return result;
 	}
@@ -88,7 +91,10 @@ public class CustomerResource {
 			e.printStackTrace();
 		}
 
-		return Response.status(200).entity(customer).build();
+		if (customer != null)
+			return Response.status(200).entity(customer).build();
+		else
+			return Response.status(404).build();
 	}
 
 	@GET

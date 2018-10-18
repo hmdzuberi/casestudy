@@ -86,7 +86,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 	@Override
 	public Customer getCustomer(long customerNo) throws SQLException {
 
-		Customer customer = new Customer();
+		Customer customer = null;
 
 		String sql = "select * from hz_customerDetails natural join hz_carDetails where customerNo = ?";
 		PreparedStatement pstmt = con.prepareStatement(sql);
@@ -95,13 +95,17 @@ public class CustomerDAOImpl implements CustomerDAO {
 
 		ResultSet rs = pstmt.executeQuery();
 
-		while (rs.next()) {
+		if(rs.next()) {
+			customer = new Customer();
+			
 			customer.setCustomerNo(customerNo);
 			customer.setCustomerName(rs.getString("customerName"));
 			customer.setPhoneNo(rs.getLong("phoneNo"));
 			customer.setAddress(rs.getString("address"));
 			customer.setCar(new Car(rs.getString("carNo"), rs.getString("carModel")));
 		}
+		
+		System.out.println(customer);
 
 		return customer;
 	}

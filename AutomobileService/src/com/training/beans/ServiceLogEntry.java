@@ -4,7 +4,7 @@ public class ServiceLogEntry {
 
 	private long serviceLogId;
 	private String carNo;
-	private long serviceId;
+	private String serviceName;
 	private String dateGiven;
 	private String deliveryDate;
 	private double insuranceCoverage;
@@ -14,12 +14,12 @@ public class ServiceLogEntry {
 		super();
 	}
 
-	public ServiceLogEntry(long serviceLogId, String carNo, long serviceId, String dateGiven, String deliveryDate,
+	public ServiceLogEntry(long serviceLogId, String carNo, String serviceName, String dateGiven, String deliveryDate,
 			double insuranceCoverage, double netAmount) {
 		super();
 		this.serviceLogId = serviceLogId;
 		this.carNo = carNo;
-		this.serviceId = serviceId;
+		this.serviceName = serviceName;
 		this.dateGiven = dateGiven;
 		this.deliveryDate = deliveryDate;
 		this.insuranceCoverage = insuranceCoverage;
@@ -42,12 +42,12 @@ public class ServiceLogEntry {
 		this.carNo = carNo;
 	}
 
-	public long getServiceId() {
-		return serviceId;
+	public String getServiceName() {
+		return serviceName;
 	}
 
-	public void setServiceId(long serviceId) {
-		this.serviceId = serviceId;
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
 	}
 
 	public String getDateGiven() {
@@ -84,7 +84,7 @@ public class ServiceLogEntry {
 
 	@Override
 	public String toString() {
-		return "ServiceLogEntry [serviceLogId=" + serviceLogId + ", carNo=" + carNo + ", serviceId=" + serviceId
+		return "ServiceLogEntry [serviceLogId=" + serviceLogId + ", carNo=" + carNo + ", serviceName=" + serviceName
 				+ ", dateGiven=" + dateGiven + ", deliveryDate=" + deliveryDate + ", insuranceCoverage="
 				+ insuranceCoverage + ", netAmount=" + netAmount + "]";
 	}

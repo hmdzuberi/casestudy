@@ -12,6 +12,10 @@ public interface ServiceDAO {
 
 	public List<ServiceLogEntry> getServiceLogs() throws SQLException;
 
-	public List<Service> getServiceList() throws SQLException;
+	public Service getService(String serviceName) throws SQLException;
+	
+	public List<String> getServiceNames() throws SQLException;
+	
+	public List<ServiceLogEntry> getServiceLogs(String carNo) throws SQLException;
 
 }

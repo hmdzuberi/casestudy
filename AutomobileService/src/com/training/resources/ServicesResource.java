@@ -11,6 +11,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -41,18 +42,37 @@ public class ServicesResource {
 	@GET
 	@Path("get")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getServices() {
+	public Response getServiceNames() {
 
-		List<Service> serviceList = null;
+		List<String> serviceNames = null;
 
 		try {
-			serviceList = serviceDAO.getServiceList();
+			serviceNames = serviceDAO.getServiceNames();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		if(serviceList != null)
-			return Response.status(200).entity(serviceList).build();
+		if(serviceNames != null)
+			return Response.status(200).entity(serviceNames).build();
+		else
+			return Response.status(Status.NOT_FOUND).build();
+	}
+	
+	@GET
+	@Path("getService")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getService(@QueryParam("serviceName") String serviceName) {
+
+		Service service = null;
+
+		try {
+			service = serviceDAO.getService(serviceName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		if(service != null)
+			return Response.status(200).entity(service).build();
 		else
 			return Response.status(Status.NOT_FOUND).build();
 	}
@@ -66,6 +86,25 @@ public class ServicesResource {
 
 		try {
 			serviceLogList = serviceDAO.getServiceLogs();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		if(serviceLogList != null)
+			return Response.status(200).entity(serviceLogList).build();
+		else
+			return Response.status(Status.NOT_FOUND).build();
+	}
+	
+	@GET
+	@Path("getlog")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getServiceLogs(@QueryParam("carNo") String carNo) {
+		
+		List<ServiceLogEntry> serviceLogList = null;
+
+		try {
+			serviceLogList = serviceDAO.getServiceLogs(carNo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

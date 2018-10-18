@@ -13,37 +13,23 @@
     <script type="text/javascript">
 
         $(function () {
-            let url = "http://localhost:8080/AutomobileService/rest/customer/new";
-            $.get(url, function (data) {
-                $("#customerNo").val(data);
-            });
-
-            $("#btn").on('click', function () {
-                var customer = {
-                    "customerNo": $("#customerNo").val(),
-                    "customerName": $("#customerName").val(),
-                    "phoneNo": $("#phoneNo").val(),
-                    "address": $("#address").val(),
-                    "car": {
-                        "carNo": $("#carNo").val(),
-                        "carModel": $("#carModel").val()
-                    }
-                };
-
+            $("#getBtn").on('click', function () {
+                $("#info").empty();
+                $(":input", "#form").not(":button, #customerNo").val("");
                 $.ajax({
-                    url: "http://localhost:8080/AutomobileService/rest/customer/add",
-                    method: "POST",
-                    contentType: "application/json",
-                    data: JSON.stringify(customer),
-                    success: function (data) {
-                        $(":input", "#form").not(":button").val("");
-                        $("#info").empty().append(data);
-                        // document.location = "main.jsp";
+                    url: "http://localhost:8080/AutomobileService/rest/customer/get?customerNo=" + $("#customerNo").val(),
+                    method: "GET",
+                    success: function (customer) {
+                        $("#customerName").val(customer.customerName);
+                        $("#phoneNo").val(customer.phoneNo);
+                        $("#address").val(customer.address);
+                        $("#carNo").val(customer.car.carNo);
+                        $("#carModel").val(customer.car.carModel);
                     },
                     error: function (err) {
                         $("#info").empty().append("Error");
                     }
-                });
+                })
             });
         });
 
@@ -67,41 +53,42 @@
     </c:if>
     <c:if test="${isValidUser == true}">
         <div style="margin-left: 10px" class="col-md-4">
-            <h2>Add Customer</h2>
+            <h2>Get Customer</h2>
             <form class="form-group" id="form">
                 <h4>Customer Details</h4>
                 <div>
                     <label for="customerNo">Customer No:</label>
-                    <input type="text" id="customerNo" name="customerNo" class="form-control" disabled>
+                    <input type="text" id="customerNo" name="customerNo" class="form-control">
+                    <br>
+                    <input type="button" value="Get Customer" class="btn btn-primary" id="getBtn">
+                    <span id="info" style="margin-left: 10px"></span>
                 </div>
                 <br>
                 <div>
                     <label for="customerName">Customer Name:</label>
-                    <input type="text" id="customerName" name="customerName" class="form-control">
+                    <input type="text" id="customerName" name="customerName" class="form-control" disabled>
                 </div>
                 <br>
                 <div>
                     <label for="phoneNo">Phone No:</label>
-                    <input type="text" id="phoneNo" name="phoneNo" class="form-control">
+                    <input type="text" id="phoneNo" name="phoneNo" class="form-control" disabled>
                 </div>
                 <br>
                 <div>
                     <label for="address">Address:</label>
-                    <input type="text" id="address" name="address" class="form-control">
+                    <input type="text" id="address" name="address" class="form-control" disabled>
                 </div>
                 <br>
                 <h4>Car Details</h4>
                 <div>
                     <label for="carNo">Car No:</label>
-                    <input type="text" id="carNo" name="carNo" class="form-control">
+                    <input type="text" id="carNo" name="carNo" class="form-control" disabled>
                 </div>
                 <br>
                 <div>
                     <label for="carModel">Car Model:</label>
-                    <input type="text" id="carModel" name="carModel" class="form-control">
+                    <input type="text" id="carModel" name="carModel" class="form-control" disabled>
                 </div>
-                <br>
-                <input type="button" class="btn btn-primary" id="btn" value="Add"><span id="info" style="margin-left: 10px"></span>
             </form>
             <br>
             <a href="login">Back</a>

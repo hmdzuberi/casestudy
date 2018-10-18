@@ -7,35 +7,35 @@
         crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
         crossorigin="anonymous"></script>
-	<script type="text/javascript">
-	
-		$(function() {
-			$("#registerBtn").on('click', function() {
-				var user = {
-					"username": $("#username").val(),
-					"password": $("#password").val()
-				};
-				
-				$.ajax({
-					url: "http://localhost:8080/AutomobileService/rest/EmpRegister",
-					method: "POST",
-					contentType:"application/json",
-					data: JSON.stringify(user),
-					success: function(data) {
-						$("#info").empty();
-						$("#info").append("<span>" + data + "</span>");
-					}
-				});
-			});
-		});
-	
-	</script>
+    <script type="text/javascript">
+
+        $(function () {
+            $("#registerBtn").on('click', function () {
+                var user = {
+                    "username": $("#username").val(),
+                    "password": $("#password").val()
+                };
+
+                $.ajax({
+                    url: "http://localhost:8080/AutomobileService/rest/EmpRegister",
+                    method: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(user),
+                    success: function (data) {
+                        $("#info").empty();
+                        $("#info").append("<span>" + data + "</span>");
+                    }
+                });
+            });
+        });
+
+    </script>
     <title>Login</title>
 </head>
 
 <body>
     <div class="col-md-4" style="margin-left: 10px">
-    	<h2>Register</h2>
+        <h2>Register</h2>
         <form class="form-group" id="regForm">
             <div>
                 <label for="username">Username:</label>
@@ -49,12 +49,11 @@
             <br>
             <div>
                 <input type="button" value="register" class="btn btn-primary" id="registerBtn">
+                <span id="info" style="margin-left: 10px"></span>
             </div>
         </form>
         <br>
-        <div id="info"></div>
-		<br>
-		<a href="login">Back</a>
+        <a href="login">Back</a>
     </div>
 </body>
 

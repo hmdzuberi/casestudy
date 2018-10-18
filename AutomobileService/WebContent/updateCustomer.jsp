@@ -13,12 +13,20 @@
     <script type="text/javascript">
 
         $(function () {
-            let url = "http://localhost:8080/AutomobileService/rest/customer/new";
-            $.get(url, function (data) {
-                $("#customerNo").val(data);
+            $("#getBtn").on('click', function () {
+                let url = "http://localhost:8080/AutomobileService/rest/customer/get?customerNo=" + $("#customerNo").val();
+                $.get(url, function (customer) {
+                    console.log(customer);
+                    $("#customerNo").attr("disabled", "disabled");
+                    $("#customerName").val(customer.customerName);
+                    $("#phoneNo").val(customer.phoneNo);
+                    $("#address").val(customer.address);
+                    $("#carNo").val(customer.car.carNo);
+                    $("#carModel").val(customer.car.carModel);
+                });
             });
 
-            $("#btn").on('click', function () {
+            $("#updateBtn").on('click', function () {
                 var customer = {
                     "customerNo": $("#customerNo").val(),
                     "customerName": $("#customerName").val(),
@@ -31,19 +39,18 @@
                 };
 
                 $.ajax({
-                    url: "http://localhost:8080/AutomobileService/rest/customer/add",
+                    url: "http://localhost:8080/AutomobileService/rest/customer/update",
                     method: "POST",
                     contentType: "application/json",
                     data: JSON.stringify(customer),
                     success: function (data) {
                         $(":input", "#form").not(":button").val("");
                         $("#info").empty().append(data);
-                        // document.location = "main.jsp";
                     },
                     error: function (err) {
                         $("#info").empty().append("Error");
                     }
-                });
+                })
             });
         });
 
@@ -67,13 +74,16 @@
     </c:if>
     <c:if test="${isValidUser == true}">
         <div style="margin-left: 10px" class="col-md-4">
-            <h2>Add Customer</h2>
+            <h2>Update Customer</h2>
             <form class="form-group" id="form">
                 <h4>Customer Details</h4>
                 <div>
                     <label for="customerNo">Customer No:</label>
-                    <input type="text" id="customerNo" name="customerNo" class="form-control" disabled>
+                    <input type="text" id="customerNo" name="customerNo" class="form-control">
+                    <br>
+                    <input type="button" value="Get Customer" class="btn btn-primary" id="getBtn">
                 </div>
+
                 <br>
                 <div>
                     <label for="customerName">Customer Name:</label>
@@ -101,7 +111,7 @@
                     <input type="text" id="carModel" name="carModel" class="form-control">
                 </div>
                 <br>
-                <input type="button" class="btn btn-primary" id="btn" value="Add"><span id="info" style="margin-left: 10px"></span>
+                <input type="button" class="btn btn-primary" id="updateBtn" value="Update"><span id="info" style="margin-left: 10px"></span>
             </form>
             <br>
             <a href="login">Back</a>
