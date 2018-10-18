@@ -1,3 +1,6 @@
+/**
+ * @author Hamaad
+ */
 package com.training.dao.impl;
 
 import java.sql.Connection;
@@ -17,6 +20,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 		this.con = con;
 	}
 
+	
 	@Override
 	public int addCustomer(Customer customer) throws SQLException {
 

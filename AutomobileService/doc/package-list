@@ -1,0 +1,6 @@
+com.training.beans
+com.training.dao
+com.training.dao.impl
+com.training.filters
+com.training.resources
+com.training.servlets

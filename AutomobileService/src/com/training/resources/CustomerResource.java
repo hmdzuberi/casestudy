@@ -1,3 +1,6 @@
+/**
+ * @author Hamaad
+ */
 package com.training.resources;
 
 import java.sql.Connection;
