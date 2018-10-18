@@ -45,6 +45,7 @@
                 $.get(url, function (data) {
                     $("#amount").val(data.amount);
                     $("#netAmount").val($("#amount").val());
+                    $("#insuranceCoverage").val(0);
                 });
             });
 
@@ -115,7 +116,7 @@
 		%>
     </c:if>
     <c:if test="${isValidUser == true}">
-        <div style="margin-left: 10px" class="col-md-6">
+        <div style="margin-left: 10px" class="col-md-9">
             <h2>New Service</h2>
             <form class="form-group" id="form">
                 <div style="float: left" class="col-md-6">

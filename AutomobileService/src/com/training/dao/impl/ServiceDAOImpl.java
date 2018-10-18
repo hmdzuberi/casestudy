@@ -27,7 +27,7 @@ public class ServiceDAOImpl implements ServiceDAO {
 	
 			ServiceLogEntry serviceLogEntry = new ServiceLogEntry();
 	
-			serviceLogEntry.setServiceLogId(rs.getLong("serviceLogNo"));
+			serviceLogEntry.setServiceLogId(rs.getLong("serviceLogId"));
 			serviceLogEntry.setCarNo(rs.getString("carNo"));
 			serviceLogEntry.setServiceName(rs.getString("serviceName"));
 			serviceLogEntry.setDateGiven(rs.getString("dateGiven"));
@@ -82,8 +82,10 @@ public class ServiceDAOImpl implements ServiceDAO {
 	
 		List<ServiceLogEntry> serviceLogList = new ArrayList<>();
 	
-		String sql = "select * from hz_serviceLog";
+		String sql = "select * from hz_serviceLog where carNo = ?";
 		PreparedStatement pstmt = con.prepareStatement(sql);
+		
+		pstmt.setString(1, carNo);
 	
 		ResultSet rs = pstmt.executeQuery();
 	

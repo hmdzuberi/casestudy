@@ -52,46 +52,49 @@
 		%>
     </c:if>
     <c:if test="${isValidUser == true}">
-        <div style="margin-left: 10px" class="col-md-4">
+        <div style="margin-left: 10px" class="col-md-8">
             <h2>Get Customer</h2>
             <form class="form-group" id="form">
-                <h4>Customer Details</h4>
-                <div>
-                    <label for="customerNo">Customer No:</label>
-                    <input type="text" id="customerNo" name="customerNo" class="form-control">
+                <div class="col-md-6" style="float: left">
+                    <h4>Customer Details</h4>
+                    <div>
+                        <label for="customerNo">Customer No:</label>
+                        <input type="text" id="customerNo" name="customerNo" class="form-control">
+                        <br>
+                        <input type="button" value="Get Customer" class="btn btn-primary" id="getBtn">
+                        <span id="info" style="margin-left: 10px"></span>
+                    </div>
                     <br>
-                    <input type="button" value="Get Customer" class="btn btn-primary" id="getBtn">
-                    <span id="info" style="margin-left: 10px"></span>
+                    <div>
+                        <label for="customerName">Customer Name:</label>
+                        <input type="text" id="customerName" name="customerName" class="form-control" disabled>
+                    </div>
+                    <br>
+                    <div>
+                        <label for="phoneNo">Phone No:</label>
+                        <input type="text" id="phoneNo" name="phoneNo" class="form-control" disabled>
+                    </div>
+                    <br>
+                    <div>
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" name="address" class="form-control" disabled>
+                    </div>
+                    <br>
+                    <a href="login">Back</a>
                 </div>
-                <br>
-                <div>
-                    <label for="customerName">Customer Name:</label>
-                    <input type="text" id="customerName" name="customerName" class="form-control" disabled>
-                </div>
-                <br>
-                <div>
-                    <label for="phoneNo">Phone No:</label>
-                    <input type="text" id="phoneNo" name="phoneNo" class="form-control" disabled>
-                </div>
-                <br>
-                <div>
-                    <label for="address">Address:</label>
-                    <input type="text" id="address" name="address" class="form-control" disabled>
-                </div>
-                <br>
-                <h4>Car Details</h4>
-                <div>
-                    <label for="carNo">Car No:</label>
-                    <input type="text" id="carNo" name="carNo" class="form-control" disabled>
-                </div>
-                <br>
-                <div>
-                    <label for="carModel">Car Model:</label>
-                    <input type="text" id="carModel" name="carModel" class="form-control" disabled>
+                <div class="col-md-6" style="float: right">
+                    <h4>Car Details</h4>
+                    <div>
+                        <label for="carNo">Car No:</label>
+                        <input type="text" id="carNo" name="carNo" class="form-control" disabled>
+                    </div>
+                    <br>
+                    <div>
+                        <label for="carModel">Car Model:</label>
+                        <input type="text" id="carModel" name="carModel" class="form-control" disabled>
+                    </div>
                 </div>
             </form>
-            <br>
-            <a href="login">Back</a>
         </div>
     </c:if>
 </body>
