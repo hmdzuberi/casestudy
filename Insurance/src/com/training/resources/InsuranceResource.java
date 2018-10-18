@@ -11,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.apache.log4j.Logger;
 
@@ -54,9 +55,11 @@ public class InsuranceResource {
 			e.printStackTrace();
 		}
 
-		log.info(insuranceDetails);
-
-		return Response.status(200).entity(insuranceDetails).build();
+		if(insuranceDetails != null) {
+			log.info(insuranceDetails);
+			return Response.status(200).entity(insuranceDetails).build();
+		} else
+			return Response.status(Status.NOT_FOUND).build();
 	}
 
 }

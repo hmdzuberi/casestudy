@@ -19,7 +19,7 @@ public class InsuranceDAOImpl implements InsuranceDAO {
 	@Override
 	public Insurance getInsuranceDetails(String carNo) throws SQLException {
 
-		Insurance insuranceDetails = new Insurance();
+		Insurance insuranceDetails = null;
 
 		String sql = "select * from hz_insurance where carNo = ?";
 		PreparedStatement pstmt = con.prepareStatement(sql);
@@ -28,7 +28,9 @@ public class InsuranceDAOImpl implements InsuranceDAO {
 
 		ResultSet rs = pstmt.executeQuery();
 
-		while(rs.next()) {
+		if (rs.next()) {
+			insuranceDetails = new Insurance();
+
 			insuranceDetails.setInsuranceNo(rs.getLong("insuranceNo"));
 			insuranceDetails.setCustomerName(rs.getString("customerName"));
 			insuranceDetails.setCarNo(carNo);
