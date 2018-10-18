@@ -68,6 +68,7 @@
                     });
                 } else {
                     $("#netAmount").val($("#amount").val());
+                    $("#insuranceCoverage").val("");
                 }
             });
 
